@@ -1,0 +1,8 @@
+**/*.ts
+*.ts
+
+!**/*.d.ts
+!*.d.ts
+
+tsconfig.json
+.prettierrc

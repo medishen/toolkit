@@ -1,0 +1,49 @@
+{
+  "name": "@medishn/toolkit",
+  "version": "1.0.0",
+  "description": "",
+  "files": [
+    "dist/",
+    "README.md"
+  ],
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "tests",
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "mocha --require ts-node/register tests/integration/*.spec.ts",
+    "build": "tsc -b ./packages/tsconfig.build.json",
+    "chmod": "chmod +x ./scripts/release.sh",
+    "release": "npm run chmod && ./scripts/release.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/medishen/toolkit.git"
+  },
+  "keywords": [
+    "nodejs",
+    "medishn"
+  ],
+  "engines": {
+    "node": ">= 20"
+  },
+  "author": "Mahdi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/medishen/toolkit/issues"
+  },
+  "homepage": "https://github.com/medishen/toolkit#readme",
+  "devDependencies": {
+    "@types/chai": "^4.3.19",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^22.0.0",
+    "@types/sinon": "^17.0.3",
+    "chai": "^4.3.7",
+    "mocha": "^10.7.3",
+    "sinon": "^19.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}
