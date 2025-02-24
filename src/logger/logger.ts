@@ -1,30 +1,6 @@
 import { isFalsy, isObject } from '..';
 import { LoggerOptions, LoggerService, LogLevel, Style, StyleKey } from '../common';
 
-/**
- * A colorful, configurable logging utility for Node.js applications.
- * Provides structured logging with customizable levels, colors, and contexts.
- * Perfect for debugging and monitoring applications in both development and production environments.
- *
- * @class
- * @implements {LoggerService}
- *
- * @example
- * // Basic usage
- * const logger = new Logger({ context: 'AuthService' });
- * logger.info('User logged in', { userId: 123 });
- *
- * @example
- * // Custom log levels and colors
- * const prodLogger = new Logger({
- *   context: 'PaymentGateway',
- *   logLevels: ['error', 'warn'],
- *   colorful: false
- * });
- * prodLogger.error('Payment failed', { orderId: 456 });
- *
- * @see {@link docs/api/logger.doc.md} For full API documentation
- */
 export class Logger implements LoggerService {
   private static logLevels: LogLevel[] = ['info', 'error', 'warn', 'debug', 'verbose'];
   private static defaultContext = 'Application';
