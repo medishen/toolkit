@@ -79,7 +79,6 @@ export const isWeakMap = TypeGuards.weakmap;
 export const isWeakSet = TypeGuards.weakset;
 export const isArrayBuffer = TypeGuards.arraybuffer;
 
-
 // Utility guards
 export const isNil = TypeGuards.nil;
 export const isEmpty = TypeGuards.empty;

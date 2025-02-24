@@ -1,15 +1,4 @@
-/**
- * Represents a class constructor with generic support
- */
-export interface Constructor<T = any> extends Function {
-  new (...args: any[]): T;
-  prototype: T;
-}
-
-/**
- * Basic primitive value types in JavaScript
- */
-export type Primitive = string | number | boolean | symbol | null | undefined | bigint;
+import { Constructor, Primitive } from './common.types';
 
 /**
  * Special number cases that need explicit checks
@@ -27,7 +16,7 @@ export type StructuralType = 'function' | 'object' | 'array' | 'date' | 'promise
 export type CollectionType = 'map' | 'set' | 'weakmap' | 'weakset' | 'arraybuffer';
 
 /**
- * Node.js specific types 
+ * Node.js specific types
  */
 export type NodeJSType = 'promise';
 
