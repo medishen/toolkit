@@ -1,7 +1,7 @@
 {
   "name": "@medishn/toolkit",
   "version": "1.0.0",
-  "description": "",
+  "description": "a toolkit",
   "files": [
     "dist/",
     "README.md"
@@ -14,9 +14,9 @@
   },
   "scripts": {
     "test": "mocha --require ts-node/register tests/integration/*.spec.ts",
-    "build": "tsc -b ./packages/tsconfig.build.json",
-    "chmod": "chmod +x ./scripts/release.sh",
-    "release": "npm run chmod && ./scripts/release.sh"
+    "build": "tsc",
+    "chmod": "chmod +x ./scripts/release",
+    "release": "npm run chmod && ./scripts/release"
   },
   "repository": {
     "type": "git",

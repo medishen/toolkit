@@ -49,11 +49,11 @@ export class Merger<T extends object> {
   }
 
   private mergeObjects<T extends object, U extends object>(target: T, source: U): T {
-    const merged = { ...target };
+    const merged:any = { ...target };
 
     for (const key of Object.keys(source)) {
-      const targetValue = target[key];
-      const sourceValue = source[key];
+      const targetValue = (target as any)[key];
+      const sourceValue = (source as any)[key];
 
       merged[key] = this.deepMerge(targetValue, sourceValue);
     }

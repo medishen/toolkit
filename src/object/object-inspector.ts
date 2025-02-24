@@ -169,7 +169,7 @@ export class ObjectInspector<T extends object> {
   ): ObjectInspector<{ [K in keyof T]: U }> {
     if (!this.is('object')) throw new Error('Cannot map non-object');
 
-    const result = {} as { [K in keyof T]: U };
+    const result:any = {} as { [K in keyof T]: U };
     if (Array.isArray(this.target)) {
       for (let i = 0; i < (this.target as any).length; i++) {
         const key = i.toString();

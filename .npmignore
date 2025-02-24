@@ -6,3 +6,12 @@
 
 tsconfig.json
 .prettierrc
+scripts
+examples
+docs
+tests
+.git
+.gitignore
+tsconfig
+.env
+src
