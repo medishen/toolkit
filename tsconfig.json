@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "composite": true,
+    "declaration": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useUnknownInCatchVariables": false,
+    "allowJs": false,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "rootDir": ".",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "types": ["node"],
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "strictPropertyInitialization": false,
+    "noLib": false
+  },
+  "include": ["src/**/*"],
+  "preserveSymlinks": true,
+  "exclude": ["node_modules"]
+}
