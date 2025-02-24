@@ -60,3 +60,10 @@ All notable changes to the `@medishn/toolkit` package will be documented in this
 - Provided migration guides for developers transitioning from similar libraries.
 
 This release marks the stable 1.0.0 version of `@medishn/toolkit`, providing a robust set of utilities for modern TypeScript development. For detailed migration instructions and usage examples, refer to the [official documentation](https://github.com/medishen/toolkit/docs).
+
+## [1.0.1] - 2025-02-24
+
+### **Fix**
+
+- Update Readme
+- Update find Module in dist
