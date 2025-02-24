@@ -92,12 +92,6 @@ We welcome contributions! Please see our:
 
 ---
 
-## License 📄
-
-MIT © [Your Name]. See [LICENSE](./LICENSE) for details.
-
----
-
 ## Support & Feedback 💬
 
 Found a bug? Have a feature request?  
