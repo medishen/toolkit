@@ -1,62 +1,101 @@
-# @medishn/toolkit 🛠️
+# @medishn/toolkit
 
 [![npm version](https://img.shields.io/npm/v/@medishn/toolkit?color=blue)](https://www.npmjs.com/package/@medishn/toolkit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Coverage Status](https://coveralls.io/repos/github/medishen/toolkit/badge.svg?branch=main)](https://coveralls.io/github/medishen/toolkit?branch=main)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./docs/CONTRIBUTING.md)
 
-`@medishn/toolkit` is a **TypeScript-first utility library** designed to simplify common development tasks. It provides a collection of robust, type-safe tools for deep object inspection, data manipulation, type checking, and more. Whether you're working with complex data structures or need reliable utilities for everyday tasks, this toolkit has you covered.
+## Features
 
----
+### **Core Utilities**
+- **Object Inspection** - Safely navigate nested structures with `inspect()`
+- **Deep Merging** - Type-safe object merging with `merge()`
+- **Data Transformation** - Chainable `map()`, `filter()`, `reduce()` operations
 
-## Features ✨
+### **Type Safety**
+- **40+ Type Guards** - Runtime validation with `isString`, `isObject`, `isPromise`, etc.
+- **Advanced Types** - `Maybe<T>`, `Dictionary<T>`, `Nullable<T>`, and other essential helpers
+- **HTTP Status Codes** - Full `HttpStatus` enum with RFC-compliant values
 
-- **Deep Object Inspection**: Safely traverse and inspect nested objects with `peek`.
-- **Type-Safe Merging**: Merge objects and arrays with full type inference using `merge`.
-- **Type Checking**: Comprehensive type validation with `isType` .
-- **Data Manipulation**: Easily `pick`, `omit`, objects.
-- **Date & String Utilities**: Format dates, calculate time differences, and manipulate strings.
+### **Logging**
+- Colorful console output 🌈
+- Context-aware logging
+- Multiple log levels (`error`, `warn`, `info`, `debug`, `verbose`)
+
+### **Error Handling**
+- Standardized HTTP exceptions
+- RFC 7807 Problem Details format
+- Custom error creation utilities
 
 ---
 
 ## Installation 📦
 
-Install the package using npm or yarn:
-
 ```bash
 npm install @medishn/toolkit
-```
-
-Or with yarn:
-
-```bash
+# or
 yarn add @medishn/toolkit
 ```
 
+---
+
+## Quick Start 🚀
+
+```typescript
+import { inspect, Logger, HttpStatus } from '@medishn/toolkit';
+
+// Object Inspection
+const userData = inspect(rawData)
+  .to('profile')
+  .get('email');
+
+// Logging
+const logger = new Logger({ context: 'Auth' });
+logger.info('User logged in', { userId: 123 });
+
+// Error Handling
+throw new NotFoundException({
+  detail: 'Resource not found',
+  status: HttpStatus.NOT_FOUND
+});
+
+// Type Safety
+if (isDate(someValue)) {
+  console.log('Timestamp:', someValue.toISOString());
+}
+```
+
+---
+
 ## Documentation 📚
 
-For detailed documentation, check out the [API Reference](./docs/API.md).
+Explore our comprehensive guides:
+
+- [Object Inspection & Manipulation](./docs/api/inspect.doc.md)
+- [Logging Best Practices](./docs/api/logger.doc.md)
+- [Error Handling Guide](./docs/api/error.doc.md)
+- [Type Utilities Reference](./docs/api/utils.doc.md)
+- [Full API Documentation](./docs/api/API.md)
+
+---
 
 ## Contributing 🤝
 
-We welcome contributions! Whether you're fixing a bug, adding a feature, or improving documentation, your help is appreciated. Please read our [Contributing Guide](./docs/CONTRIBUTING.md) to get started.
+We welcome contributions! Please see our:
+- [Contribution Guide](./docs/CONTRIBUTING.md)
+- [Code of Conduct](./docs/CODE_OF_CONDUCT.md)
 
-## Code of Conduct 📜
-
-We are committed to fostering a welcoming and inclusive community. Please review our [Code of Conduct](./docs/CODE_OF_CONDUCT.md) before participating.
-
-## FAQ ❓
-
-Have questions? Check out our [FAQ](./docs/FAQ.md) for answers to common questions.
+---
 
 ## License 📄
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+MIT © [Your Name]. See [LICENSE](./LICENSE) for details.
 
-## Acknowledgments 🙏
+---
 
-- Inspired by libraries like [lodash](https://lodash.com/), [ramda](https://ramdajs.com/), and [immer](https://immerjs.github.io/immer/).
+## Support & Feedback 💬
 
-## Support 💬
+Found a bug? Have a feature request?  
+[Open an Issue](https://github.com/medishen/toolkit/issues)  
+Get quick help: [bitsgenix@gmail.com](mailto:bitsgenix@gmail.com)
 
-If you find this project useful, please consider giving it a ⭐️ on [GitHub](https://github.com/medishen/toolkit). For questions or feedback, open an issue or reach out to [bitsgenix@gmail.com].
+⭐ **Love this package?** Leave a star on GitHub to show your support!
