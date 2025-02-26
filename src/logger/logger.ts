@@ -18,7 +18,7 @@ export class Logger implements LoggerService {
     debug: ['FgBlue', 'Dim'],
     verbose: ['FgMagenta', 'Dim'],
   };
-  constructor(options: Partial<LoggerOptions> = {}) {
+  constructor(private options: Partial<LoggerOptions> = {}) {
     this.context = options.context || Logger.defaultContext;
     this.logLevels = new Set(options.logLevels || Logger.logLevels);
     this.colorful = options.colorful ?? Logger.defaultColorful;
@@ -68,6 +68,13 @@ export class Logger implements LoggerService {
   verbose(message: any, ...optionalParams: [...any, string?]): void;
   verbose(message: any, ...optionalParams: any[]) {
     this.log('verbose', message, optionalParams);
+  }
+
+  child(context: string): LoggerService {
+    return new Logger({
+      ...this.options,
+      context: `${this.context}::${context}`,
+    });
   }
 
   /* Core Implementation */

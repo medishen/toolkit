@@ -164,6 +164,43 @@ Logs detailed information for deeper insights.
 logger.verbose('Loading configuration', { path: './config.json' });
 ```
 
+Here's the documentation update for the new `child()` method, integrated into your existing structure:
+
+---
+
+## Child Loggers
+
+Create nested loggers with contextual inheritance using the `child()` method. Perfect for modular applications!
+
+### `child(context: string): LoggerService`
+
+Creates a new logger instance with combined context while inheriting parent configuration.
+
+**Parameters:**
+
+- `context`: Sub-context name to append
+
+**Returns:**  
+New `Logger` instance with combined context
+
+### Example Usage
+
+```typescript
+// Parent logger
+const authLogger = new Logger({ context: 'AuthService' });
+
+// Child logger inherits parent config
+const dbLogger = authLogger.child('Database');
+const redisLogger = dbLogger.child('Redis');
+
+// Logs will show full context chain
+dbLogger.info('Connection established');
+// [AuthService::Database] [INFO] Connection established
+
+redisLogger.warn('Cache miss');
+// [AuthService::Database::Redis] [WARN] Cache miss
+```
+
 ## Example Output
 
 ```

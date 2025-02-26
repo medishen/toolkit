@@ -31,7 +31,6 @@ const user = inspect({
 
 ---
 
-
 ## Property Access & Type Narrowing
 
 ### `.in<K>(key: K): boolean`
@@ -102,17 +101,13 @@ New inspector instance with narrowed type
 **Example:**
 
 ```typescript
-const dateInspector = inspect(unknownValue).as(
-  (v): v is Date => v instanceof Date,
-);
+const dateInspector = inspect(unknownValue).as((v): v is Date => v instanceof Date);
 
 // Usage with custom types
 interface AdminUser extends User {
   role: 'admin';
 }
-const adminInspector = inspect(user).as(
-  (u): u is AdminUser => u.role === 'admin',
-);
+const adminInspector = inspect(user).as((u): u is AdminUser => u.role === 'admin');
 ```
 
 ---
@@ -159,7 +154,6 @@ const firstItem = inspect([{ value: 1 }, { value: 2 }])
 
 Type checking using registered type validators.
 
-
 **Example:**
 
 ```typescript
@@ -185,9 +179,7 @@ Type-safe object transformation.
 **Example:**
 
 ```typescript
-const transformed = user.map((value, key) =>
-  typeof value === 'number' ? value * 2 : value,
-);
+const transformed = user.map((value, key) => (typeof value === 'number' ? value * 2 : value));
 ```
 
 ### `.filter(predicate: (value, key) => boolean): ObjectInspector<Partial<T>>`

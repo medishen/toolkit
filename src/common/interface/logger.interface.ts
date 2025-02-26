@@ -1,4 +1,4 @@
-import { LogLevel } from "../types";
+import { LogLevel } from '../types';
 
 /**
  * @public
@@ -24,6 +24,8 @@ export interface LoggerService {
    * Write a 'verbose' level log.
    */
   verbose?(message: any, ...optionalParams: any[]): void;
+
+  child(context: string): LoggerService;
 }
 
 /**

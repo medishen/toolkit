@@ -1,11 +1,4 @@
-import {
-  isFunction,
-  isNil,
-  isObject,
-  isSymbol,
-  isUndefined,
-  TypeGuards,
-} from '../guards';
+import { isFunction, isNil, isObject, isSymbol, isUndefined, TypeGuards } from '../guards';
 
 export class ObjectInspector<T extends object> {
   constructor(private target: T) {}
@@ -32,15 +25,11 @@ export class ObjectInspector<T extends object> {
     return this.keys.length;
   }
 
-  in<K extends string & keyof T>(key: K): boolean {
+  in<K extends string & keyof T>(key: K): key is K & keyof T {
     return key in this.target || !!this.target[key];
   }
 
-  to<K extends string & keyof T>(
-    key: K,
-  ): ObjectInspector<
-    Exclude<T[K], null> extends object ? Exclude<T[K], null> : never
-  > {
+  to<K extends string & keyof T>(key: K): ObjectInspector<Exclude<T[K], null> extends object ? Exclude<T[K], null> : never> {
     const value = this.target && this.target[key];
 
     if (isNil(value) || !isObject(value)) {
@@ -49,16 +38,11 @@ export class ObjectInspector<T extends object> {
     return new ObjectInspector(value) as any;
   }
 
-  is<K extends keyof typeof TypeGuards>(
-    type: K,
-  ): this is ObjectInspector<Extract<T, ReturnType<(typeof TypeGuards)[K]>>> {
+  is<K extends keyof typeof TypeGuards>(type: K): this is ObjectInspector<Extract<T, ReturnType<(typeof TypeGuards)[K]>>> {
     return TypeGuards[type](this.target);
   }
 
-  get<K extends keyof T, V extends (arg: unknown) => unknown>(
-    key: K,
-    value?: Parameters<V>[0],
-  ): T[K] extends V ? ReturnType<V> : T[K] {
+  get<K extends keyof T, V extends (arg: unknown) => unknown>(key: K, value?: Parameters<V>[0]): T[K] extends V ? ReturnType<V> : T[K] {
     const result = this.target[key];
 
     if (!isUndefined(result) && isFunction(result)) {
@@ -68,9 +52,7 @@ export class ObjectInspector<T extends object> {
     return result as T[K] extends V ? ReturnType<V> : T[K];
   }
 
-  atIndex<N extends number>(
-    index: N,
-  ): ObjectInspector<T extends (infer U extends object)[] ? U : never> {
+  atIndex<N extends number>(index: N): ObjectInspector<T extends (infer U extends object)[] ? U : never> {
     if (!Array.isArray(this.target)) throw new Error('Target is not an array');
     if (index >= this.target.length) throw new Error('Index out of bounds');
     const value = this.target[index];
@@ -82,32 +64,20 @@ export class ObjectInspector<T extends object> {
     return new ObjectInspector(this.target as U);
   }
 
-  required<K extends string & keyof T>(
-    key: K,
-  ): ObjectInspector<
-    Exclude<T[K], undefined> extends object ? Exclude<T[K], undefined> : never
-  > {
+  required<K extends string & keyof T>(key: K): ObjectInspector<Exclude<T[K], undefined> extends object ? Exclude<T[K], undefined> : never> {
     if (!this.in(key)) {
       throw new Error(`Property ${String(key)} not found`);
     }
     const value = this.target[key];
-    if (!isObject(value))
-      throw new Error(`Property ${String(key)} is not an object`);
-    return new ObjectInspector(
-      value as Exclude<T[K], undefined> extends object
-        ? Exclude<T[K], undefined>
-        : never,
-    );
+    if (!isObject(value)) throw new Error(`Property ${String(key)} is not an object`);
+    return new ObjectInspector(value as Exclude<T[K], undefined> extends object ? Exclude<T[K], undefined> : never);
   }
 
   or<D>(defaultValue: D): D | this {
     return this.target === null ? defaultValue : this;
   }
 
-  when<K extends keyof T, V extends T[K]>(
-    key: K,
-    value: V,
-  ): this is ObjectInspector<Extract<T, { [P in K]: V }>> {
+  when<K extends keyof T, V extends T[K]>(key: K, value: V): this is ObjectInspector<Extract<T, { [P in K]: V }>> {
     return this.target[key] === value;
   }
 
@@ -133,9 +103,7 @@ export class ObjectInspector<T extends object> {
     return new ObjectInspector<Omit<T, K>>(omitted as Omit<T, K>);
   }
 
-  find<U extends object>(
-    predicate: (value: unknown) => value is U,
-  ): ObjectInspector<U> | undefined {
+  find<U extends object>(predicate: (value: unknown) => value is U): ObjectInspector<U> | undefined {
     const visited = new WeakSet<object>();
 
     const searchInternal = (obj: unknown): ObjectInspector<U> | undefined => {
@@ -164,12 +132,10 @@ export class ObjectInspector<T extends object> {
     return searchInternal(this.target);
   }
 
-  map<U>(
-    mapper: (value: any, key: string) => U,
-  ): ObjectInspector<{ [K in keyof T]: U }> {
+  map<U>(mapper: (value: any, key: string) => U): ObjectInspector<{ [K in keyof T]: U }> {
     if (!this.is('object')) throw new Error('Cannot map non-object');
 
-    const result:any = {} as { [K in keyof T]: U };
+    const result: any = {} as { [K in keyof T]: U };
     if (Array.isArray(this.target)) {
       for (let i = 0; i < (this.target as any).length; i++) {
         const key = i.toString();
@@ -178,9 +144,7 @@ export class ObjectInspector<T extends object> {
       }
     } else {
       for (const key of this.keys) {
-        const stringKey = isSymbol(key)
-          ? `[${key.toString()}]`
-          : key.toString();
+        const stringKey = isSymbol(key) ? `[${key.toString()}]` : key.toString();
         const rawValue = this.target[key];
 
         result[key] = mapper(rawValue, stringKey!);
@@ -189,9 +153,7 @@ export class ObjectInspector<T extends object> {
     return new ObjectInspector(result);
   }
 
-  filter(
-    predicate: (value: any, key: string) => boolean,
-  ): ObjectInspector<Partial<T>> {
+  filter(predicate: (value: any, key: string) => boolean): ObjectInspector<Partial<T>> {
     if (!this.is('object')) throw new Error('Cannot filter non-object');
 
     const result = {} as Partial<T>;
@@ -205,10 +167,7 @@ export class ObjectInspector<T extends object> {
     return new ObjectInspector(result);
   }
 
-  reduce<U>(
-    reducer: (acc: U, value: any, key: string) => U,
-    initialValue: U,
-  ): U {
+  reduce<U>(reducer: (acc: U, value: any, key: string) => U, initialValue: U): U {
     if (!this.is('object')) throw new Error('Cannot reduce non-object');
 
     let result = initialValue;
@@ -218,8 +177,7 @@ export class ObjectInspector<T extends object> {
     return result;
   }
   isEmpty(): boolean {
-    if (!this.is('object'))
-      throw new Error('Cannot check emptiness of non-object');
+    if (!this.is('object')) throw new Error('Cannot check emptiness of non-object');
 
     return this.keys.length === 0;
   }

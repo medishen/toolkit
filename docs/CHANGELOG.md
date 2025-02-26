@@ -67,3 +67,13 @@ This release marks the stable 1.0.0 version of `@medishn/toolkit`, providing a r
 
 - Update Readme
 - Update find Module in dist
+
+## [1.0.3] - 2025-02-26
+
+## **Added**
+
+- add Child Loggers method
+
+### **Documentation**
+
+- add Child Loggers -> [documentation](./api/logger.doc.md#child-loggers)
