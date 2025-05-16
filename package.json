@@ -1,13 +1,10 @@
 {
   "name": "@medishn/toolkit",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "a toolkit",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist/",
-    "README.md"
-  ],
+  "files": ["dist/", "README.md"],
   "directories": {
     "doc": "docs",
     "lib": "lib",
@@ -24,10 +21,7 @@
     "type": "git",
     "url": "git+https://github.com/medishen/toolkit.git"
   },
-  "keywords": [
-    "nodejs",
-    "medishn"
-  ],
+  "keywords": ["nodejs", "medishn"],
   "engines": {
     "node": ">= 20"
   },

@@ -70,7 +70,7 @@ export class Logger implements LoggerService {
     this.log('verbose', message, optionalParams);
   }
 
-  child(context: string): LoggerService {
+  child(context: string): Logger {
     return new Logger({
       ...this.options,
       context: `${this.context}::${context}`,
