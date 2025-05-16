@@ -77,3 +77,9 @@ This release marks the stable 1.0.0 version of `@medishn/toolkit`, providing a r
 ### **Documentation**
 
 - add Child Loggers -> [documentation](./api/logger.doc.md#child-loggers)
+
+## [1.0.4] - 2025-05-16
+
+### **Fix**
+
+- fix return instance logger
